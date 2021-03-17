@@ -12,5 +12,13 @@
     <servlet-name>anyName</servlet-name>
     <url-pattern>/hello</url-pattern><!--url must start with /-->
 </servlet-mapping>
+    <servlet>
+        <servlet-name>name</servlet-name><!--give any name -->
+        <servlet-class>com.chenxiang.week2.demo.exercise</servlet-class><!--package +name of servlet class -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>name</servlet-name>
+        <url-pattern>/hi</url-pattern><!--url must start with /-->
+    </servlet-mapping>
     <!-- x=5,a= x so we can say a=5-->
 </web-app>
