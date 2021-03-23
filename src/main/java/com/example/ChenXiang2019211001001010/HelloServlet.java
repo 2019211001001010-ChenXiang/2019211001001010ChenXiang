@@ -1,5 +1,4 @@
 package com.example.ChenXiang2019211001001010;
-
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -21,7 +20,6 @@ public class HelloServlet extends HttpServlet {
         out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
     }
-
     public void destroy() {
     }
 }

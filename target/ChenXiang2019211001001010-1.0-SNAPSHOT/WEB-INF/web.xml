@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <!--add code about servlet-->
+    <!--automatic code-->
     <servlet>
         <servlet-name>anyName</servlet-name><!--give any name -->
         <servlet-class>com.chenxiang.week2.demo.HelloWorldServlet</servlet-class><!--package +name of servlet class -->
@@ -16,9 +17,25 @@
         <servlet-name>name</servlet-name><!--give any name -->
         <servlet-class>com.chenxiang.week2.demo.exercise</servlet-class><!--package +name of servlet class -->
     </servlet>
+    <servlet>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <servlet-class>com.chenxiang.week3.demo.LifeCycleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.chenxiang.week3.demo.RegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>name</servlet-name>
         <url-pattern>/hi</url-pattern><!--url must start with /-->
     </servlet-mapping>
-    <!-- x=5,a= x so we can say a=5-->
+    <servlet-mapping>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <url-pattern>/life</url-pattern>
+        <!--life ==LifeCycleServlet==com.chenxiang.week3.demo.LifeCycleServlet-->
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
 </web-app>

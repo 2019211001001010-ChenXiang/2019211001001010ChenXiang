@@ -12,7 +12,8 @@
 </head>
 <body style="font-size: 8px;text-align: center">
 <h1 style="color: gray">New User Registration!</h1>
-<form method="post"> <!-- what is method when wo use form?--><!--its GET , why? default is GET,form data is added in the URL,you can see-->
+<form method="post" action="/register"><!-- within doPost() in servlet-->
+    <!-- what is method when wo use form?--><!--its GET , why? default is GET,form data is added in the URL,you can see-->
     <!-- its better to use POST in form,data in not added in the URL-->
     <input type="text" name="Username" placeholder="Username" style="width: 200px;height: 25px;margin-top: 2px"><br/>
     <input type="password" name="password" placeholder="password" style="width: 200px;height: 25px;margin-top: 5px"><br/>
