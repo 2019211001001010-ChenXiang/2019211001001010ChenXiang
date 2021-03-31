@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet(
+/*@WebServlet(
         urlPatterns = {"/register"}
-)
+)*/
 //automatic -new --> servlet
 public class RegisterServlet extends HttpServlet {
     Connection con=null; //class variable

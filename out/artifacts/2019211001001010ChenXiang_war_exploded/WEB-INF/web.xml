@@ -21,10 +21,19 @@
         <servlet-name>LifeCycleServlet</servlet-name>
         <servlet-class>com.chenxiang.week3.demo.LifeCycleServlet</servlet-class>
     </servlet>
-    <!-- <servlet>
+    <servlet>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <servlet-class>com.chenxiang.week4.demo.ConfigDemoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <url-pattern>/config</url-pattern><!--url must start with /-->
+    </servlet-mapping>
+    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.chenxiang.week3.demo.RegisterServlet</servlet-class>
     </servlet>
+    <!--
    <servlet>
         <servlet-name>JDBCDemoServlet</servlet-name>
         <servlet-class>com.chenxiang.week4.demo.JDBCDemoServlet</servlet-class>
@@ -44,8 +53,8 @@
         <url-pattern>/life</url-pattern>
         <!--life ==LifeCycleServlet==com.chenxiang.week3.demo.LifeCycleServlet-->
     </servlet-mapping>
-    <!--<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
 </web-app>
