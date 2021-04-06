@@ -14,6 +14,8 @@ import java.sql.*;
 //automatic -new --> servlet
 public class RegisterServlet extends HttpServlet {
     Connection con=null; //class variable
+
+
     @Override
     public void init() throws ServletException{
         //only one connection
@@ -25,6 +27,7 @@ public class RegisterServlet extends HttpServlet {
         //for example change password of db = change in java code
 
         //get servletconfig --> getInitParameters --no change
+
         String driver=getServletConfig().getServletContext().getInitParameter("driver");
         String url=getServletConfig().getServletContext().getInitParameter("url");
         String username=getServletConfig().getServletContext().getInitParameter("username");
@@ -49,21 +52,28 @@ public class RegisterServlet extends HttpServlet {
 // request come here
         //get parameter from request.
         PrintWriter writer = response.getWriter();
-        String sql="insert into usertable(id,username,password,email,sex,birthday)  values(?,?,?,?,?,?) ";
+        String sql="insert into usertable(id,username,password,email,gender,birthdate)  values(?,?,?,?,?,?) ";
+        int id=Integer.valueOf(request.getParameter("ID"));
         String username =request.getParameter("Username");//name of input type -<input type="text" name = "username"/><br/>
         String password =request.getParameter("password");
         String email =request.getParameter("Email");
-        String sex =request.getParameter("sex");
-        String birthday =request.getParameter("birthday");
+        String gender =request.getParameter("sex");
+        String birthdate =request.getParameter("birthday");
         PreparedStatement pstmt= null; //调用javaSQL包的PreparedStatement来存储待运行的SQL语句
         try {
+            System.out.println("id:"+id);
+            System.out.println("usrname:"+username);
+            System.out.println("password:"+password);
+            System.out.println("email:"+email);
+            System.out.println("gender:"+gender);
+            System.out.println("birthday:"+birthdate);
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1,1);
+            pstmt.setInt(1,id);
             pstmt.setString(2,username);
             pstmt.setString(3,password);
             pstmt.setString(4,email);
-            pstmt.setString(5,sex);
-            pstmt.setString(6,birthday);
+            pstmt.setString(5,gender);
+            pstmt.setString(6,birthdate);
             pstmt.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

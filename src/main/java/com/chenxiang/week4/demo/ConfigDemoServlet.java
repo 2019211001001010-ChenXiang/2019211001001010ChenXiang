@@ -1,5 +1,4 @@
 package com.chenxiang.week4.demo;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +9,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/*@WebServlet(
+@WebServlet(
         urlPatterns = {"/config"},
         initParams = {
                 @WebInitParam(name="name", value = "ChenXiang"),
                 @WebInitParam(name="studentid", value = "2019211001001010"),
         }
-)*/
+)
 public class ConfigDemoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,10 +23,9 @@ public class ConfigDemoServlet extends HttpServlet {
         String name=config.getInitParameter("name"); //<param-name>name</param-name>
         String studentid=config.getInitParameter("studentid");
         PrintWriter writer = response.getWriter();
-        writer.println( "name: ChenXiang");
-        writer.println( "studentid: 2019211001001010");
+        writer.println( "name:"+name);
+        writer.println( "studentid:"+studentid);
         //next we need to tell about this servlet to tomcat - how ? - web.xml
-
     }
 
     @Override
