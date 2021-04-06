@@ -65,8 +65,8 @@ public class LoginServlet extends HttpServlet {
             rs=ps.executeQuery();
             if (rs.next()){ //if exist
                 System.out.println(rs.getString(1)+ " "+ rs.getString(2));
-                writer.println("<html>\n" + "<head>\n" + "</head>\n" + "\t<p style=\"font-size:24px;\">" +
-                        "<b>Login Success!!!<br>Welcome,chengxiang</b></p>"+ "<body>\n" + "</body>\n" + "</html>\n" );
+                writer.println("Login Success!!!" );
+                writer.println("Welcome,"+username);
             }
             else
                 writer.println("Username or Password Error!!!");
