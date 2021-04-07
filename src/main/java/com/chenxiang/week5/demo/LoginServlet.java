@@ -7,28 +7,23 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet(
-        urlPatterns = {"/login"},
-        initParams = {
-                @WebInitParam(name="driver", value = "com.microsoft.sqlserver.jdbc.SQLServerDriver"),
-                @WebInitParam(name="url", value = "jdbc:sqlserver://localhost:1433;DatabaseName=userdb"),
-                @WebInitParam(name="username", value = "sa"),
-                @WebInitParam(name="password", value = "123456")
-        })
-
+@WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
     Connection con=null;
     ResultSet rs=null;
     PreparedStatement ps=null;
     @Override
     public void init() throws ServletException{
-        String driver=getServletConfig().getInitParameter("driver");
-        String url=getServletConfig().getInitParameter("url");
-        String name=getServletConfig().getInitParameter("username");
-        String password=getServletConfig().getInitParameter("password");
+        super.init();
+        ServletContext Context=getServletContext();
+        String driver=Context.getInitParameter("driver");
+        String url=Context.getInitParameter("url");
+        String username=Context.getInitParameter("username");
+        String password=Context.getInitParameter("password");
+
         try {
             Class.forName(driver);
-            con= DriverManager.getConnection(url,name,password);
+            con= DriverManager.getConnection(url,username,password);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
