@@ -11,8 +11,14 @@
     <!-- what is method when wo use form?--><!--its GET , why? default is GET,form data is added in the URL,you can see-->
     <!-- its better to use POST in form,data in not added in the URL-->
     <h1>Login</h1>
+    <%
+        if(!(request.getAttribute("message")==null)){
+            //error
+            out.println(request.getAttribute("message"));
+        }
+    %>
     UserName:<input type="text" name="Username"  style="width: 200px;height: 25px;margin-top: 2px"><br/>
     Password:<input type="passowrd" name="Password"  style="width: 200px;height: 25px;margin-top: 2px"><br/>
     <input type="submit" name="password" value="login" style="background-color: gainsboro;color: black;width: 60px;height: 25px;font-size: 15px"><br/>
-
+    </form>
 <%@include file="footer.jsp"%>

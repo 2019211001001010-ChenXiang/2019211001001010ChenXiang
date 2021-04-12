@@ -8,14 +8,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-/*@WebServlet(
-        urlPatterns = {"/register"}
-)*/
 //automatic -new --> servlet
 public class RegisterServlet extends HttpServlet {
     Connection con=null; //class variable
-
-
     @Override
     public void init() throws ServletException{
         //only one connection
@@ -27,8 +22,8 @@ public class RegisterServlet extends HttpServlet {
         //for example change password of db = change in java code
 
         //get servletconfig --> getInitParameters --no change
-
-        String driver=getServletConfig().getServletContext().getInitParameter("driver");
+        //ServletContext context=getServletContext();
+        /*String driver=getServletConfig().getServletContext().getInitParameter("driver");
         String url=getServletConfig().getServletContext().getInitParameter("url");
         String username=getServletConfig().getServletContext().getInitParameter("username");
         String password=getServletConfig().getServletContext().getInitParameter("password");
@@ -39,12 +34,13 @@ public class RegisterServlet extends HttpServlet {
             System.out.println("init()-->"+con); //ok(use java code) -ok (use config in web.xml) -ok --use(@webservlet)
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
-
+        }*/
+       con= (Connection) getServletContext().getAttribute("con");//name of attribute
+        //please check the video live demo4
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+     doPost(request, response);
     }
 
     @Override
@@ -52,6 +48,7 @@ public class RegisterServlet extends HttpServlet {
 // request come here
         //get parameter from request.
         PrintWriter writer = response.getWriter();
+        //here is html code --- move these html code in a jsp page - userList.jsp
         String sql="insert into usertable(id,username,password,email,gender,birthdate)  values(?,?,?,?,?,?) ";
         int id=Integer.valueOf(request.getParameter("ID"));
         String username =request.getParameter("Username");//name of input type -<input type="text" name = "username"/><br/>
@@ -62,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
         PreparedStatement pstmt= null; //调用javaSQL包的PreparedStatement来存储待运行的SQL语句
         try {
             System.out.println("id:"+id);
-            System.out.println("usrname:"+username);
+            System.out.println("username:"+username);
             System.out.println("password:"+password);
             System.out.println("email:"+email);
             System.out.println("gender:"+gender);
@@ -75,13 +72,47 @@ public class RegisterServlet extends HttpServlet {
             pstmt.setString(5,gender);
             pstmt.setString(6,birthdate);
             pstmt.executeUpdate();
+            PrintWriter out = response.getWriter();
+            //ok-done
+            //after register a new user - user can login
+            response.sendRedirect("login.jsp");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
 
-        String sql_1="select * from usertable";
-        writer.print("<html>");
+        //String sql_1="select * from usertable";
+        // rs=con.createStatement().executeQuery(sql_1);
+
+            /*if(rs.next()) {
+                //get from rs - print - write into response
+                writer.print("<tr>");
+                writer.print("<td>"+rs.getString(1));
+                writer.print("</td>");
+                writer.print("<td>"+rs.getString(2));
+                writer.print("</td>");
+                writer.print("<td>"+rs.getString(3));
+                writer.print("</td>");
+                writer.print("<td>"+rs.getString(4));
+                writer.print("</td>");
+                writer.print("<td>"+rs.getString(5));
+                writer.print("</td>");
+                writer.print("<td>"+rs.getString(6));
+                writer.print("</td>");
+                writer.print("</tr>");
+            }*/
+        //use request attribute
+        //set rs into request attribute
+        //request.setAttribute("rsname",rs);//name - string,value - any type (object)
+
+        //request.getRequestDispatcher("userList.jsp").forward(request,response);
+        //at this point request given to userList.jsp
+        //url doesnot change
+        // no more here
+        //System.out.println("i am in RegisterServlet-->doPost()-->after forward()");//no see this line
+
+        //here is html code--move these html code in a jsp page-userList.jsp
+        /*writer.print("<html>");
         writer.print("<table border='1'>");
         writer.print("<tr>");
         writer.print("<td>ID</td>");
@@ -114,7 +145,7 @@ public class RegisterServlet extends HttpServlet {
             throwables.printStackTrace();
         }
         writer.print("</table>");
-        writer.print("</html>");
+        writer.print("</html>");*/
 
         //print - write into response
     }

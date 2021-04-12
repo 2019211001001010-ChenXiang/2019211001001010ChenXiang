@@ -60,17 +60,29 @@
             <param-value>123456</param-value>
         </init-param>
     </servlet>
-    <!--
-   <servlet>
-        <servlet-name>JDBCDemoServlet</servlet-name>
-        <servlet-class>com.chenxiang.week4.demo.JDBCDemoServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
 
-    </servlet>-->
-   <!-- <servlet-mapping>
-        <servlet-name>JDBCDemoServlet</servlet-name>
-        <url-pattern>/jdbc</url-pattern>
-    </servlet-mapping>-->
+   <servlet>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <servlet-class>com.chenxiang.week4.demo.ConfigDemoServlet</servlet-class>
+       <init-param>
+           <param-name>name</param-name>
+           <param-value>ChenXiang</param-value>
+       </init-param>
+       <init-param>
+           <param-name>studentid</param-name>
+           <param-value>2019211001001010</param-value>
+       </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>name</servlet-name>
         <url-pattern>/hi</url-pattern><!--url must start with /-->
@@ -80,8 +92,8 @@
         <url-pattern>/life</url-pattern>
         <!--life ==LifeCycleServlet==com.chenxiang.week3.demo.LifeCycleServlet-->
     </servlet-mapping>
-    <servlet-mapping>
+   <!--<servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 </web-app>

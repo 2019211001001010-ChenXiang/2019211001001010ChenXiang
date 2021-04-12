@@ -9,13 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@WebServlet(
-        urlPatterns = {"/config"},
-        initParams = {
-                @WebInitParam(name="name", value = "ChenXiang"),
-                @WebInitParam(name="studentid", value = "2019211001001010"),
-        }
-)
 public class ConfigDemoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,4 +26,3 @@ public class ConfigDemoServlet extends HttpServlet {
 
     }
 }
-

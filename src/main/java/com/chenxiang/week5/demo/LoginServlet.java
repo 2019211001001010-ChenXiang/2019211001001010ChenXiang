@@ -30,11 +30,14 @@ public class LoginServlet extends HttpServlet {
         }
         //TODO 1: get context param -driver,url,username,password
         //TODO 2:get jdbc connection
+        //only one one
+        con= (Connection) getServletContext().getAttribute("con");
+        //check the video live demo
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    doPost(request, response);//call dopost
     }
 
     @Override
@@ -59,12 +62,26 @@ public class LoginServlet extends HttpServlet {
             ps.setString(2,password);
             rs=ps.executeQuery();
             if (rs.next()){ //if exist
+                //week 5 code
                 System.out.println(rs.getString(1)+ " "+ rs.getString(2));
-                writer.println("Login Success!!!" );
-                writer.println("Welcome,"+username);
+                //writer.println("Login Success!!!" );
+                //writer.println("Welcome,"+username);
+                //get from rs and set into request attribute
+                request.setAttribute("id",rs.getInt("id"));
+                request.setAttribute("username",rs.getString("username"));
+                request.setAttribute("password",rs.getString("password"));
+                request.setAttribute("email",rs.getString("email"));
+                request.setAttribute("gender",rs.getString("gender"));
+                request.setAttribute("birthdate",rs.getString("birthdate"));
+                //forward to userinfo.jsp
+                request.getRequestDispatcher("userinfo.jsp").forward(request,response);
+
             }
-            else
-                writer.println("Username or Password Error!!!");
+            else {
+                //writer.println("Username or Password Error!!!");
+                request.setAttribute("message","Username or Password Error!!!");
+                request.getRequestDispatcher("login.jsp").forward(request,response);
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
