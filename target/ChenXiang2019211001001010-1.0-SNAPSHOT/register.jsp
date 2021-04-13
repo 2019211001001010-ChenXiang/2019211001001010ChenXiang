@@ -6,10 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>register</title>
-</head>
+<%@include file="header.jsp"%>
 <body style="font-size: 8px;text-align: center">
 <h1 style="color: gray">New User Registration!</h1>
 

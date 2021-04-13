@@ -75,7 +75,7 @@ public class RegisterServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             //ok-done
             //after register a new user - user can login
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login.jsp");//添加redirect重定向到login
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -122,31 +122,9 @@ public class RegisterServlet extends HttpServlet {
         writer.print("<td>Sex</td>");
         writer.print("<td>BirthDay</td>");
         writer.print("</tr>");
-        try {
-            ResultSet rs=con.createStatement().executeQuery(sql_1);
-            while(rs.next()){
-                //get from rs - print - write into response
-                writer.print("<tr>");
-                writer.print("<td>"+rs.getString(1));
-                writer.print("</td>");
-                writer.print("<td>"+rs.getString(2));
-                writer.print("</td>");
-                writer.print("<td>"+rs.getString(3));
-                writer.print("</td>");
-                writer.print("<td>"+rs.getString(4));
-                writer.print("</td>");
-                writer.print("<td>"+rs.getString(5));
-                writer.print("</td>");
-                writer.print("<td>"+rs.getString(6));
-                writer.print("</td>");
-                writer.print("</tr>");
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
         writer.print("</table>");
         writer.print("</html>");*/
-
         //print - write into response
     }
     @Override
