@@ -15,7 +15,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void init() throws ServletException{
         super.init();
-        ServletContext Context=getServletContext();
+        /*ServletContext Context=getServletContext();
         String driver=Context.getInitParameter("driver");
         String url=Context.getInitParameter("url");
         String username=Context.getInitParameter("username");
@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
+        }*/
         //TODO 1: get context param -driver,url,username,password
         //TODO 2:get jdbc connection
         //only one one
