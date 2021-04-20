@@ -1,4 +1,5 @@
 package com.chenxiang.week6.demo;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -12,6 +13,7 @@ public class RedirectServlet extends HttpServlet {
         System.out.println("before redirect");
         //response.sendRedirect("index.jsp");//url - change to index.jsp
         //http://localhost:8080/2019211001001010ChenXiang_war_exploded/redirect
+        //http://localhost:8080/2019211001001010ChenXiang_war_exploded/index.jsp
         //see the url - only last part of url changed (redirect--> index.jsp)
         System.out.println("after redirect");
         //2.start with /

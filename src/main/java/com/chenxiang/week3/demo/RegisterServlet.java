@@ -80,7 +80,6 @@ public class RegisterServlet extends HttpServlet {
             throwables.printStackTrace();
         }
 
-
         //String sql_1="select * from usertable";
         // rs=con.createStatement().executeQuery(sql_1);
 
