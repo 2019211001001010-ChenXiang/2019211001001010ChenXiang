@@ -17,9 +17,32 @@
             out.println(request.getAttribute("message"));
         }
     %>
+<%
+    //read cookies
+    Cookie[] allCookies=request.getCookies();//give all cookies
+    String username="",password="",rememberMeVal="";
+    if(allCookies!=null){
+        for(Cookie c:allCookies){
+           //get one by one
+            if(c.getName().equals("cUsername")){
+                //get value of this cookies
+                username=c.getValue();
+            }
+            if(c.getName().equals("cPassword")){
+                //get value of this cookies
+                password=c.getValue();
+            }
+            if(c.getName().equals("cRememberMe")){
+                //get value of this cookies
+                rememberMeVal=c.getValue();
+            }
+        }
+    }
+%>
 <form method="post" action="login">
-    UserName:<input type="text" name="Username"  style="width: 200px;height: 25px;margin-top: 2px"><br/>
-    Password:<input type="passowrd" name="Password"  style="width: 200px;height: 25px;margin-top: 2px"><br/>
+    UserName:<input type="text" name="Username" value="<%=username%>"><br/>
+    Password:<input type="passowrd" name="Password" value="<%=password%>"><br/>
+    <input type="checkbox" name="rememberMe" value="1" <%=rememberMeVal.equals("1") ?"checked":""%>checked/>RememberMe<br/>
     <input type="submit" name="password" value="login" style="background-color: gainsboro;color: black;width: 60px;height: 25px;font-size: 15px"><br/>
     </form>
 <%@include file="footer.jsp"%>

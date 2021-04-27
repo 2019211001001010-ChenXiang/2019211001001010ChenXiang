@@ -24,5 +24,3 @@
     <input type="checkbox" name="check"value="password"font size="10px">remember passwords<br/>
 </form>
 <%@include file="footer.jsp"%>
-</body>
-</html>

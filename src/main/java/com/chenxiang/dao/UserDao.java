@@ -1,11 +1,7 @@
 package com.chenxiang.dao;
-
 import com.chenxiang.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +15,7 @@ public class UserDao implements IUserDao{
         st.setString(3,user.getPassword());
         st.setString(4,user.getEmail());
         st.setString(5,user.getGender());
-        st.setDate(6,(java.sql.Date) user.getBirthdate());
+        st.setDate(6,new java.sql.Date(user.getBirthdate().getTime()));
        /* st.setString(1,username);
         st.setString(2,password);*/
         ResultSet rs=st.executeQuery();
@@ -57,25 +53,23 @@ public class UserDao implements IUserDao{
 
     @Override
     public int updateUser(Connection con, User user) throws SQLException {//update where id=?
-        String sql="update usertable set id =?,username=?,password =?,email=?,gender=?,birthdate=? where id=?";
+        String sql="update usertable set username=?,password =?,email=?,gender=?,birthdate=? where id=?";
         PreparedStatement st=con.prepareStatement(sql);
-        st.setInt(1,user.getId());
-        st.setString(2,user.getUsername());
-        st.setString(3,user.getPassword());
-        st.setString(4,user.getEmail());
-        st.setString(5,user.getGender());
-        st.setDate(6,(java.sql.Date) user.getBirthdate());
-        st.setInt(7,user.getId());
-        ResultSet rs=st.executeQuery();
-        if(rs.next()){
-            user= new User();
-            user.setId(rs.getInt("id"));
-            user.setUsername(rs.getString("username"));
-            user.setPassword(rs.getString("password"));
-            user.setEmail(rs.getString("email"));
-            user.setGender(rs.getString("gender"));
-            user.setBirthdate(rs.getDate("birthdate"));
+
+        st.setString(1,user.getUsername());
+        st.setString(2,user.getPassword());
+        st.setString(3,user.getEmail());
+        st.setString(4,user.getGender());
+        st.setDate(5,new java.sql.Date(user.getBirthdate().getTime()));
+        st.setInt(6,user.getId());
+        st.executeUpdate();
+        if(st.executeUpdate()>0){
+            return 1;
         }
+        //TODO 5.1 - write update sql where id = ?
+        //TODO 5.2 - create prepared statement
+        //TODO 5.3 - executeUpdate()
+        //TODO 5.4 - return int
         return 0;
     }
 
