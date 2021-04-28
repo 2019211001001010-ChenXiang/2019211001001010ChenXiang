@@ -19,6 +19,7 @@
     %>
 <%
     //read cookies
+
     Cookie[] allCookies=request.getCookies();//give all cookies
     String username="",password="",rememberMeVal="";
     if(allCookies!=null){

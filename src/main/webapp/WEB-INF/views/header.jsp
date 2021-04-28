@@ -29,7 +29,6 @@
    - <a style="color:white;" href="productList">Product</a>
    - <a style="color:white;" href="#">FAQ</a>
    - <a style="color:white;" href="#">About</a>
-   
    </td>
    </tr>
    <tr height="25"><td align="center"><font size="18" color="blue">

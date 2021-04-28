@@ -9,7 +9,6 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
          //when user click logout -- method is get
          request.getSession(false).invalidate();//kill session right now
         request.setAttribute("message","You have successfully logged out");

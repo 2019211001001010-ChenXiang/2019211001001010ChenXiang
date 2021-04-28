@@ -13,6 +13,7 @@
     //get user from session
     User u=(User) session.getAttribute("user");
 %>
+
 <form method="post" action="updateUser"><!-- within doPost() in servlet-->
     <!-- what is method when wo use form?--><!--its GET , why? default is GET,form data is added in the URL,you can see-->
     <!-- its better to use POST in form,data in not added in the URL-->

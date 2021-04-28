@@ -16,6 +16,7 @@ import java.util.Date;
 
 @WebServlet(name = "UpdateUserServlet", value = "/updateUser")//url
 public class UpdateUserServlet extends HttpServlet {
+
     Connection con=null;
     @Override
     public void init() throws ServletException{
