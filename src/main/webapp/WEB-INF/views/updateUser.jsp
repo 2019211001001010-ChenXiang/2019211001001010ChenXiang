@@ -18,7 +18,7 @@
     <!-- what is method when wo use form?--><!--its GET , why? default is GET,form data is added in the URL,you can see-->
     <!-- its better to use POST in form,data in not added in the URL-->
     <input type="hidden" name="id" value="<%=u.getId()%>">
-    <input type="text" name="username" placeholder="username" value="<%=u.getUsername()%>" style="width: 200px;height: 25px;margin-top: 2px"><br/>
+    <input type="text" name="username" placeholder="Username" value="<%=u.getUsername()%>" style="width: 200px;height: 25px;margin-top: 2px"><br/>
     <input type="password" name="password" placeholder="password" value="<%=u.getPassword()%>" style="width: 200px;height: 25px;margin-top: 5px"><br/>
     <input type="text" name="email" placeholder="email" value="<%=u.getEmail() %>" style="width: 200px;height: 25px;margin-top: 5px"><br/>
     Gender <input type="radio" name="gender" value="male" <%="male".equals(u.getGender())?"checked":" "%>>Male

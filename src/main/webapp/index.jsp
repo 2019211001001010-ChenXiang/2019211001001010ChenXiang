@@ -2,7 +2,7 @@
 <h2>Welcome to My Online Shop Home Page.</h2> <br>
 <form method="get" target='_blank' action="search">
     <!-- <url-pattern> search </url-pattern> -->
-    <input type="text" name="txt" size=30/>
+    <input type="text" name="txt" size=index.jsp30/>
     <select name="search">
         <option value="baidu">Baidu</option>
         <option value="bing">Bing</option>
