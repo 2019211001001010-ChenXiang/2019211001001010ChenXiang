@@ -15,6 +15,7 @@ public class LoginServlet extends HttpServlet {
     Connection con=null;
     ResultSet rs=null;
     PreparedStatement ps=null;
+
     @Override
     public void init() throws ServletException{
         super.init();

@@ -1,4 +1,4 @@
-
+<%--
 <%@include file="header.jsp"%>
 	<section id="slider"><!--slider-->
 		<div class="container">
@@ -64,5 +64,28 @@
 			</div>
 		</div>
 	</section><!--/slider-->
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp"%>--%>
+<html>
+<body>
+	<% //set in page, request, session, application
+    pageContext . setAttribute ("attName", "att in page");
+    request. setAttribute ("attName", "att in request ") ;
+    session. setAttribute ("attName", "att in session") ;
+    application. setAttribute ("attName", "att in application") ;%>
+    <%out.println("<br/>"+pageContext.getAttribute ("attName"));
+	  out.println("<br/>"+request.getAttribute ("attName"));
+      out.println("<br/>"+session.getAttribute ("attName"));
+      out.println("<br/>"+application.getAttribute ("attName"));
+      %>
+	<br/><hr/><h4>Use pageContext to get attribute from page, request, session and application</h4>
+	<% out.println("<br/>"+pageContext.getAttribute("attName",PageContext. PAGE_SCOPE));
+       out.println("<br/>"+pageContext.getAttribute("attName",PageContext.REQUEST_SCOPE));
+       out.println("<br/>"+pageContext.getAttribute("attName",PageContext.SESSION_SCOPE));
+       out.println("<br/>"+pageContext.getAttribute("attName",PageContext.APPLICATION_SCOPE));
+%>
+    <br/><hr/><h4>Use pageContext to Find attribute from page , request, session and application</h4>
+    <%=pageContext.findAttribute("attName") %>
+	<!-- search in page , request, session and application ,= find first one-->
+    </body>
+    </html>
 

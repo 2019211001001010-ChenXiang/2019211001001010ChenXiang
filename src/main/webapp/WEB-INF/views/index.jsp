@@ -1,4 +1,3 @@
-
 <%@include file="header.jsp"%>
 	<section id="slider"><!--slider-->
 		<div class="container">
@@ -65,4 +64,3 @@
 		</div>
 	</section><!--/slider-->
 <%@include file="footer.jsp"%>
-
