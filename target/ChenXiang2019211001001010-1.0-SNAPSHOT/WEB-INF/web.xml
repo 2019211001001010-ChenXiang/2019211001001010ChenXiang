@@ -22,15 +22,14 @@
         <param-name>password</param-name>
         <param-value>123456</param-value>
     </context-param>
-
-    <servlet>
-        <servlet-name>anyName</servlet-name><!--give any name -->
-        <servlet-class>com.chenxiang.week2.demo.HelloWorldServlet</servlet-class><!--package +name of servlet class -->
-    </servlet>
-<servlet-mapping>
-    <servlet-name>anyName</servlet-name>
-    <url-pattern>/hello</url-pattern><!--url must start with /-->
-</servlet-mapping>
+    <!--    <servlet>
+            <servlet-name>anyName</servlet-name>&lt;!&ndash;give any name &ndash;&gt;
+            <servlet-class>com.chenxiang.week2.demo.HelloWorldServlet</servlet-class>&lt;!&ndash;package +name of servlet class &ndash;&gt;
+        </servlet>
+    <servlet-mapping>
+        <servlet-name>anyName</servlet-name>
+        <url-pattern>/hello</url-pattern>&lt;!&ndash;url must start with /&ndash;&gt;
+    </servlet-mapping>-->
     <servlet>
         <servlet-name>name</servlet-name><!--give any name -->
         <servlet-class>com.chenxiang.week2.demo.exercise</servlet-class><!--package +name of servlet class -->
@@ -65,17 +64,17 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
-   <servlet>
+    <servlet>
         <servlet-name>ConfigDemoServlet</servlet-name>
         <servlet-class>com.chenxiang.week4.demo.ConfigDemoServlet</servlet-class>
-       <init-param>
-           <param-name>name</param-name>
-           <param-value>ChenXiang</param-value>
-       </init-param>
-       <init-param>
-           <param-name>studentid</param-name>
-           <param-value>2019211001001010</param-value>
-       </init-param>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>ChenXiang</param-value>
+        </init-param>
+        <init-param>
+            <param-name>studentid</param-name>
+            <param-value>2019211001001010</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>
@@ -92,12 +91,41 @@
         <url-pattern>/life</url-pattern>
         <!--life ==LifeCycleServlet==com.chenxiang.week3.demo.LifeCycleServlet-->
     </servlet-mapping>
-   <!--<servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>-->
+    <!--<servlet-mapping>
+         <servlet-name>RegisterServlet</servlet-name>
+         <url-pattern>/register</url-pattern>
+     </servlet-mapping>-->
 
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
+
+    <!--chain of filters-->
+    <!--1st-->
+    <filter>
+        <filter-name>HelloFilter</filter-name>
+        <filter-class>com.chenxiang.filter.HelloFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HelloFilter</filter-name>
+        <url-pattern>/hello</url-pattern><!--url of HelloServlet -this filter is only for HelloServlet-->
+    </filter-mapping>
+    <!--2nd-->
+    <filter>
+        <filter-name>LoggerFilter</filter-name>
+        <filter-class>com.chenxiang.filter.LoggerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoggerFilter</filter-name>
+        <url-pattern>/hello</url-pattern>
+    </filter-mapping>
+    <!--3rd-->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.chenxiang.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/hello</url-pattern>
+    </filter-mapping>
 </web-app>

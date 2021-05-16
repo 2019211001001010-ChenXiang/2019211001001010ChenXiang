@@ -40,7 +40,8 @@ public class RegisterServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     doPost(request, response);
+        /*doPost(request, response);*/
+        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
     }
 
     @Override
@@ -49,8 +50,8 @@ public class RegisterServlet extends HttpServlet {
         //get parameter from request.
         PrintWriter writer = response.getWriter();
         //here is html code --- move these html code in a jsp page - userList.jsp
-        String sql="insert into usertable(id,username,password,email,gender,birthdate)  values(?,?,?,?,?,?) ";
-        int id=Integer.valueOf(request.getParameter("ID"));
+       String sql="insert into usertable(username,password,email,gender,birthdate)  values(?,?,?,?,?) ";
+        //int id=Integer.valueOf(request.getParameter("ID"));
         String username =request.getParameter("Username");//name of input type -<input type="text" name = "username"/><br/>
         String password =request.getParameter("password");
         String email =request.getParameter("Email");
@@ -58,24 +59,24 @@ public class RegisterServlet extends HttpServlet {
         String birthdate =request.getParameter("birthday");
         PreparedStatement pstmt= null; //调用javaSQL包的PreparedStatement来存储待运行的SQL语句
         try {
-            System.out.println("id:"+id);
+            /*System.out.println("id:"+id);*/
             System.out.println("username:"+username);
             System.out.println("password:"+password);
             System.out.println("email:"+email);
             System.out.println("gender:"+gender);
             System.out.println("birthday:"+birthdate);
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1,id);
-            pstmt.setString(2,username);
-            pstmt.setString(3,password);
-            pstmt.setString(4,email);
-            pstmt.setString(5,gender);
-            pstmt.setString(6,birthdate);
+            /*pstmt.setInt(1,id);*/
+            pstmt.setString(1,username);
+            pstmt.setString(2,password);
+            pstmt.setString(3,email);
+            pstmt.setString(4,gender);
+            pstmt.setString(5,birthdate);
             pstmt.executeUpdate();
             PrintWriter out = response.getWriter();
             //ok-done
             //after register a new user - user can login
-            response.sendRedirect("login.jsp");//添加redirect重定向到login
+            response.sendRedirect("login");//添加redirect重定向到login
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
