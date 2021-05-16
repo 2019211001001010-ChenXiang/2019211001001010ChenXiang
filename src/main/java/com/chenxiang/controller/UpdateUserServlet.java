@@ -16,6 +16,7 @@ import java.util.Date;
 
 @WebServlet(name = "UpdateUserServlet", value = "/updateUser")//url
 public class UpdateUserServlet extends HttpServlet {
+
     Connection con=null;
     @Override
     public void init() throws ServletException{
@@ -49,7 +50,8 @@ public class UpdateUserServlet extends HttpServlet {
         user.setGender(gender);
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            user.setBirthdate(ft.parse(birthdate));
+
+            user.setBirthdate(new Date(ft.parse(birthdate).getTime()));
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -8,14 +8,15 @@ import java.util.List;
 public class UserDao implements IUserDao{
     @Override
     public boolean saveUser(Connection con, User user) throws SQLException {//insert into userable
-        String sql="insert into usertable (id,username,password,email,gender,birthdate)values(?,?,?,?,?,?)";
+
+        String sql="insert into usertable (username,password,email,gender,birthdate)values(?,?,?,?,?)";
         PreparedStatement st=con.prepareStatement(sql);
-        st.setInt(1,user.getId());
-        st.setString(2,user.getUsername());
-        st.setString(3,user.getPassword());
-        st.setString(4,user.getEmail());
-        st.setString(5,user.getGender());
-        st.setDate(6,new java.sql.Date(user.getBirthdate().getTime()));
+        /*st.setInt(1,user.getId());*/
+        st.setString(1,user.getUsername());
+        st.setString(2,user.getPassword());
+        st.setString(3,user.getEmail());
+        st.setString(4,user.getGender());
+        st.setDate(5,new java.sql.Date(user.getBirthdate().getTime()));
        /* st.setString(1,username);
         st.setString(2,password);*/
         ResultSet rs=st.executeQuery();

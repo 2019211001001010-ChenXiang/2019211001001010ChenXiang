@@ -60,7 +60,6 @@ public class LoginServlet extends HttpServlet {
         System.out.println("hello world");
         PrintWriter writer = response.getWriter();
 
-
         try {
             UserDao userDao=new UserDao();
             User user = userDao.findByUsernamePassword(con,username,password);//use for login
