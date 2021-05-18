@@ -1,4 +1,5 @@
 <%@include file="header.jsp"%>
+
 	<section id="slider"><!--slider-->
 		<div class="container">
 			<div class="row">
