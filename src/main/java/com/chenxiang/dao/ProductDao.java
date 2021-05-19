@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao implements  IProductDao{
@@ -54,121 +55,128 @@ public class ProductDao implements  IProductDao{
 
     @Override
     public int update(Product instance, Connection con) throws SQLException {
-        Product product=null;
-        String sql="update from usertable where prouctId=?";
-        PreparedStatement st=con.prepareStatement(sql);
-        st.setInt(1,product.getProductId());
-        ResultSet rs=st.executeQuery();
-        if(rs.next()){
-            product=new Product();
-            product.setProductId(rs.getInt("productId"));
-            product.setProductName(rs.getString("productName"));
-            product.setProductDescription(rs.getString("productDescription"));
-            product.setPicture(rs.getBinaryStream("picture"));
-            product.setPrice(rs.getDouble("picture"));
-            product.setCategoryId(rs.getInt("categoryId"));
+        int n = 0;
+        String sql = "UPDATE product SET ProductName=?,ProductDescription=?,Picture=?,price=?,CategoryID=?" +
+                "WHERE ProductId=?";
+        PreparedStatement pt = con.prepareStatement(sql);
+        pt.setString(1, instance.getProductName());
+        pt.setString(2, instance.getProductDescription());
+        if(instance.getPicture()!=null) {
+            //for sql server
+            pt.setBinaryStream(3, instance.getPicture());
+            //for mysql
+            //   pt.setBlob(3, product.getPicture());
+        }
+        pt.setDouble(4, instance.getPrice());
+        pt.setInt(5, instance.getCategoryId());
+        pt.setInt(6,instance.getProductId());
+        n = pt.executeUpdate();
+        if (n > 0) {
+            return n;
         }
         return 0;
     }
 
     @Override
     public Product findById(Integer productId, Connection con) throws SQLException {
-        Product product=null;
-        String sql="select*from usertable where prouctId=?";
-        PreparedStatement st=con.prepareStatement(sql);
-        st.setInt(1,product.getProductId());
-        ResultSet rs=st.executeQuery();
-        if(rs.next()){
-            product=new Product();
-            product.setProductId(rs.getInt("productId"));
-            product.setProductName(rs.getString("productName"));
-            product.setProductDescription(rs.getString("productDescription"));
+        String sql = "SELECT*FROM product WHERE ProductId=?";
+        PreparedStatement pt = con.prepareStatement(sql);
+        pt.setInt(1,productId);
+        ResultSet rs=pt.executeQuery();
+        if (rs.next()){
+            Product product=new Product();
+            product.setProductName(rs.getString("ProductName"));
+            product.setProductDescription(rs.getString("ProductDescription"));
             product.setPicture(rs.getBinaryStream("picture"));
-            product.setPrice(rs.getDouble("picture"));
-            product.setCategoryId(rs.getInt("categoryId"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCategoryId(rs.getInt("CategoryId"));
+            return product;
         }
         return null;
     }
 
     @Override
     public List<Product> findByCategoryId(int categoryId, Connection con) throws SQLException {
-        Product product=null;
-        String sql="select*from usertable where CategoryId=?";
-        PreparedStatement st=con.prepareStatement(sql);
-        st.setInt(1,product.getCategoryId());
-        ResultSet rs=st.executeQuery();
-        if(rs.next()){
-            product=new Product();
-            product.setProductId(rs.getInt("productId"));
-            product.setProductName(rs.getString("productName"));
-            product.setProductDescription(rs.getString("productDescription"));
+        String sql = "SELECT*FROM product WHERE categoryId=?";
+        PreparedStatement pt = con.prepareStatement(sql);
+        pt.setInt(1,categoryId);
+        ResultSet rs=pt.executeQuery();
+        List<Product> list=new ArrayList<>();
+        while (rs.next()){
+            Product product=new Product();
+            product.setProductName(rs.getString("ProductName"));
+            product.setProductDescription(rs.getString("ProductDescription"));
             product.setPicture(rs.getBinaryStream("picture"));
-            product.setPrice(rs.getDouble("picture"));
-            product.setCategoryId(rs.getInt("categoryId"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCategoryId(rs.getInt("CategoryId"));
+            list.add(product);
+            return list;
         }
         return null;
     }
 
     @Override
     public List<Product> findByPrice(double minPrice, double maxPrice, Connection con) throws SQLException {
-        Product product=null;
-        String sql="select*from usertable where Price=?";
-        PreparedStatement st=con.prepareStatement(sql);
-        st.setDouble(1,product.getPrice());
-        ResultSet rs=st.executeQuery();
-        if(rs.next()){
-            product=new Product();
-            product.setProductId(rs.getInt("productId"));
-            product.setProductName(rs.getString("productName"));
-            product.setProductDescription(rs.getString("productDescription"));
+        String sql = "SELECT*FROM product WHERE price>=? AND price<=?";
+        PreparedStatement pt = con.prepareStatement(sql);
+        pt.setDouble(1,minPrice);
+        pt.setDouble(2,maxPrice);
+        ResultSet rs=pt.executeQuery();
+        List<Product> list=new ArrayList<>();
+        while (rs.next()){
+            Product product=new Product();
+            product.setProductName(rs.getString("ProductName"));
+            product.setProductDescription(rs.getString("ProductDescription"));
             product.setPicture(rs.getBinaryStream("picture"));
-            product.setPrice(rs.getDouble("picture"));
-            product.setCategoryId(rs.getInt("categoryId"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCategoryId(rs.getInt("CategoryId"));
+            list.add(product);
+            return list;
         }
         return null;
     }
 
     @Override
     public List<Product> findAll(Connection con) throws SQLException {
-        Product product=null;
-        String sql="select*from usertable where prouctId=?";
-        PreparedStatement st=con.prepareStatement(sql);
-        st.setInt(1,product.getProductId());
-        ResultSet rs=st.executeQuery();
-        if(rs.next()){
-            product=new Product();
-            product.setProductId(rs.getInt("productId"));
-            product.setProductName(rs.getString("productName"));
-            product.setProductDescription(rs.getString("productDescription"));
+        String sql = "SELECT*FROM product";
+        PreparedStatement pt = con.prepareStatement(sql);
+        ResultSet rs=pt.executeQuery();
+        List<Product> list=new ArrayList<>();
+        while (rs.next()){
+            Product product=new Product();
+            product.setProductName(rs.getString("ProductName"));
+            product.setProductDescription(rs.getString("ProductDescription"));
             product.setPicture(rs.getBinaryStream("picture"));
-            product.setPrice(rs.getDouble("picture"));
-            product.setCategoryId(rs.getInt("categoryId"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCategoryId(rs.getInt("CategoryId"));
+            list.add(product);
+            return list;
         }
         return null;
     }
 
     @Override
     public List<Product> findByProductName(String productName, Connection con) throws SQLException {
-        Product product=null;
-        String sql="select*from usertable where prouctName=?";
-        PreparedStatement st=con.prepareStatement(sql);
-        st.setString(1,product.getProductName());
-        ResultSet rs=st.executeQuery();
-        if(rs.next()){
-            product=new Product();
-            product.setProductId(rs.getInt("productId"));
-            product.setProductName(rs.getString("productName"));
-            product.setProductDescription(rs.getString("productDescription"));
+        String sql = "SELECT*FROM product WHERE ProductName=?";
+        PreparedStatement pt = con.prepareStatement(sql);
+        pt.setString(1,productName);
+        ResultSet rs=pt.executeQuery();
+        List<Product> list=new ArrayList<>();
+        while (rs.next()){
+            Product product=new Product();
+            product.setProductName(rs.getString("ProductName"));
+            product.setProductDescription(rs.getString("ProductDescription"));
             product.setPicture(rs.getBinaryStream("picture"));
-            product.setPrice(rs.getDouble("picture"));
-            product.setCategoryId(rs.getInt("categoryId"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCategoryId(rs.getInt("CategoryId"));
+            list.add(product);
+            return list;
         }
         return null;
     }
 
     @Override
     public List<Product> getPicture(Integer productId, Connection con) throws SQLException {
-
         return null;
     }
 }
