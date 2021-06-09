@@ -53,7 +53,6 @@ public class ShopServlet extends HttpServlet {
         //forward
         String path="/WEB-INF/views/shop.jsp";
         request.getRequestDispatcher(path).forward(request,response);
-
     }
 
     @Override
