@@ -82,10 +82,10 @@
 						<td>OID:order Id</td>
 						<td>order Date</td>
 						<%
-							com.dabing.model.Order o=(com.dabing.model.Order)pageContext.findAttribute("o");
+							com.chenxiang.model.Order o=(com.chenxiang.model.Order)pageContext.findAttribute("o");
 							int userId=o.getCustomerId();
 							java.sql.Connection con=(java.sql.Connection)application.getAttribute("con");
-							com.dabing.dao.UserDao userDao=new com.dabing.dao.UserDao();
+							com.chenxiang.dao.UserDao userDao=new com.chenxiang.dao.UserDao();
 							String customerName=userDao.findById(con, userId).getUsername();
 							 %>
 						 <td><%=customerName %></td>
@@ -97,7 +97,7 @@
 						<td class="cart_total">
 						<%
 							int n=o.getPaymentId();
-							String paymentType=com.dabing.model.Payment.findByPaymentId(con,n);
+							String paymentType=com.chenxiang.model.Payment.findByPaymentId(con,n);
 							 %>
 								<p class="cart_total_price"><%=paymentType %></p>
 							</td>
