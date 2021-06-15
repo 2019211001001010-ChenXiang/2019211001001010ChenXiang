@@ -70,7 +70,7 @@ public  class Payment implements java.io.Serializable {
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()){
 				Payment c = new Payment();
-				c.setPaymentId(resultSet.getInt("paymentid"));
+				c.setPaymentId(resultSet.getInt("PaymentId"));
 				c.setPaymentType(resultSet.getString("PaymentType"));
 				c.setAllowed(resultSet.getInt("allowed")==1?true:false);
 				list.add(c);

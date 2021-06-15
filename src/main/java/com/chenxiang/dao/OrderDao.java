@@ -26,12 +26,12 @@ import com.chenxiang.model.Product;
  * augmented to handle user-managed Spring transactions. Each of these methods
  * provides additional information for how to configure it for the desired type
  * of transaction control.
- * 
+ *
  * @author dabing
  */
 public class OrderDao implements IOrderDao {
 
-	@Override 
+	@Override
 	public int save(Connection con,Order order) throws SQLException {
 		int flag=0;
 		try {
@@ -57,7 +57,7 @@ public class OrderDao implements IOrderDao {
 			st.setString(13, order.getNotes());
 			st.setDouble(14, order.getOrderTotal());
 			flag = st.executeUpdate();//insert a row in order table
-			
+
 			//get newly inserted OrderId-select
 				String lastId="SELECT max(orderid) as orderId from [dbo].[order] ";//"SELECT max(orderid) as orderId from userdb.order"; for mysql
 				ResultSet rs=con.createStatement().executeQuery(lastId);
@@ -76,9 +76,9 @@ public class OrderDao implements IOrderDao {
 					st1.setDouble(3, item.getProduct().getPrice());
 					st1.setInt(4, item.getQuantity());
 					st1.setDouble(5, item.getQuantity()*item.getProduct().getPrice());
-					 flag = st1.executeUpdate();
+					flag = st1.executeUpdate();
 				}
-			 con.commit();	//commit the transaction-all SQL statements committed as a single unit
+			        con.commit();	//commit the transaction-all SQL statements committed as a single unit
 			} catch (Exception re) {
 			try {
 				con.rollback();//If any statement failed to execute,abort the transaction:
@@ -91,20 +91,20 @@ public class OrderDao implements IOrderDao {
 		}
 		return flag;
 	}//end save
-	@Override 
+	@Override
 	public int delete(Connection con,Order order) {
 		return 0;
 	}
-	@Override 
+	@Override
 	public int update(Connection con,Order order) {
 			return 0;
 	}
-	@Override 
+	@Override
 	public Order findById(Connection con,int id) {
 
 		return findByProperty(con,"orderId", id).get(0);
 	}
-	@Override 
+	@Override
 	public List<Order> findByProperty(Connection con,String propertyName, Object value) {
 		System.out.println("finding Order instance with property: " + propertyName
 				+ ", value: " + value);
@@ -131,7 +131,7 @@ public class OrderDao implements IOrderDao {
 				o.setPhone(rs.getString("Phone"));
 				o.setNotes(rs.getString("Notes"));
 				o.setOrderTotal(rs.getDouble("OrderTotal"));
-				
+
 				orderList.add(o);
 			}
 		} catch (RuntimeException | SQLException re) {
@@ -143,58 +143,57 @@ public class OrderDao implements IOrderDao {
 		}
 		return orderList;
 	}
-	@Override 
+	@Override
 	public List<Order> findByUserId(Connection con,Object CustomerID) {
 		return findByProperty(con,"CustomerID", CustomerID);
 	}
 
-	@Override 
+	@Override
 	public List<Order> findByFirstName(Connection con,Object firstName) {
 		return findByProperty(con,"firstName", firstName);
 	}
-	@Override 
+	@Override
 	public List<Order> findByLastName(Connection con,Object lastName) {
 		return findByProperty(con,"LastName", lastName);
 	}
-	@Override 
+	@Override
 	public List<Order> findByAddress1(Connection con,Object address1) {
 		return findByProperty(con,"ADDRESS1", address1);
 	}
-	@Override 
+	@Override
 	public List<Order> findByAddress2(Connection con,Object address2) {
 		return findByProperty(con,"ADDRESS2", address2);
 	}
-	@Override 
+	@Override
 	public List<Order> findByCity(Connection con,Object city) {
 		return findByProperty(con,"CITY", city);
 	}
-	@Override 
+	@Override
 	public List<Order> findByState(Connection con,Object state) {
 		return findByProperty(con,"STATE", state);
 	}
-	@Override 
+	@Override
 	public List<Order> findByPostalCode(Connection con,Object postalCode) {
 		return findByProperty(con,"POSTAL_CODE", postalCode);
 	}
-	@Override 
+	@Override
 	public List<Order> findByCountry(Connection con,Object country) {
 		return findByProperty(con,"COUNTRY", country);
 	}
-	@Override 
+	@Override
 	public List<Order> findByPhone(Connection con,Object phone) {
 		return findByProperty(con,"PHONE", phone);
 	}
-	@Override 
+	@Override
 	public List<Order> findByNotes(Connection con,Object notes) {
 		return findByProperty(con,"NOTES", notes);
 	}
-	@Override 
+	@Override
 	public List<Order> findByOrderTotal(Connection con,Object orderTotal) {
 		return findByProperty(con,"ORDER_TOTAL", orderTotal);
 	}
-	@Override 
-	public List<Order> findAll(Connection con) {
 
+	public List<Order> findAll(Connection con) {
 		List<Order> orderList=new ArrayList<Order>();
 		try {
 			String queryString = "select * from [dbo].[Order]";// userdb.Order for mysql
@@ -218,7 +217,7 @@ public class OrderDao implements IOrderDao {
 				o.setPhone(rs.getString("Phone"));
 				o.setNotes(rs.getString("Notes"));
 				o.setOrderTotal(rs.getDouble("OrderTotal"));
-				
+
 				orderList.add(o);
 			}
 		} catch (RuntimeException | SQLException re) {
@@ -230,7 +229,7 @@ public class OrderDao implements IOrderDao {
 		}
 		return orderList;
 	}
-	
+
 @Override
 	public List<Item> findItemsByOrderId(Connection con,int orderId) {
 		List<Item> itemList=new ArrayList<Item>();
